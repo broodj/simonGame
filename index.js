@@ -8,4 +8,14 @@ function nextSequence(){
   var randomChosenColour = buttonColours[randomNumber];
   //add the chosen colour to the end of the current game pattern
   gamePattern.push(randomChosenColour);
+
+  //choose the colour chosen by randomChosenColour
+  $('#' + randomChosenColour).fadeOut(100).fadeIn(100);
+
+  //create a new audio sound based on chosen colour
+  var audio = new Audio('sounds/' + randomChosenColour + '.mp3');
+  //play audio
+  audio.play();
 }
+
+nextSequence();
