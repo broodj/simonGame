@@ -18,4 +18,6 @@ function nextSequence(){
   audio.play();
 }
 
-nextSequence();
+
+//user must press a key to start the game
+$(document).on('keypress', nextSequence);
