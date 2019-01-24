@@ -1,5 +1,6 @@
 var buttonColours = ['red','blue','green','yellow'];
 var gamePattern = [];
+var userClickedPattern = [];
 
 function nextSequence(){
   //create a random number between 0 and 3
@@ -18,6 +19,16 @@ function nextSequence(){
   audio.play();
 }
 
-
+nextSequence();
 //user must press a key to start the game
-$(document).on('keypress', nextSequence);
+// $(document).on('keypress', nextSequence);
+
+//click handler for coloured panels
+$('.btn').click(function(event){
+  //store the id of the clicked square
+  var userChosenColour = $(event.target).attr('id');
+  //add the chosen square to the player pattern
+  userClickedPattern.push(userChosenColour);
+
+  console.log(userClickedPattern);
+});
