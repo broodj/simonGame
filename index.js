@@ -32,10 +32,12 @@ function playSound(name){
   audio.play();
 }
 
+
 function animateClick(currentColour){
+  //add pressed class to current click target
   var target = $('#' + currentColour);
   target.addClass('pressed');
-
+  //remove pressed class after 100ms delay, creates flash animation
   setTimeout(function(){
     target.removeClass('pressed');
   }, 100);
