@@ -9,6 +9,7 @@ $('.btn').click(function(event){
   //add the chosen square to the player pattern
   userClickedPattern.push(userChosenColour);
   playSound(userChosenColour);
+  animateClick(userChosenColour);
 });
 
 function nextSequence(){
@@ -29,6 +30,15 @@ function playSound(name){
   //create a new audio sound based on chosen colour
   var audio = new Audio('sounds/' + name + '.mp3');
   audio.play();
+}
+
+function animateClick(currentColour){
+  var target = $('#' + currentColour);
+  target.addClass('pressed');
+
+  setTimeout(function(){
+    target.removeClass('pressed');
+  }, 100);
 }
 
 nextSequence();
