@@ -6,7 +6,6 @@ var level = 0;
 
 $(document).keypress(function(){
   if(!gameStarted){
-    
     $('h1').text('Level ' + level);
     nextSequence();
     gameStarted = true;
@@ -21,9 +20,14 @@ $('.btn').click(function(event) {
   userClickedPattern.push(userChosenColour);
   playSound(userChosenColour);
   animateClick(userChosenColour);
+  checkAnswer(userClickedPattern[userClickedPattern.length - 1]);
+
+
 });
 
 function nextSequence() {
+  //reset the user clicked pattern
+  userClickedPattern = [];
   //increase the level each time this function is called
   level++;
   //change level title after level is increased
@@ -34,12 +38,43 @@ function nextSequence() {
   var randomChosenColour = buttonColours[randomNumber];
   //add the chosen colour to the end of the current game pattern
   gamePattern.push(randomChosenColour);
-
   //choose the colour chosen by randomChosenColour
   $('#' + randomChosenColour).fadeOut(100).fadeIn(100);
-
+  //play sound for corresponding colour
   playSound(randomChosenColour);
+}
 
+// function checkAnswer(currentLevel){
+//   //check if last user click was the same node as the game sequence, i.e. last entries into gamePattern and userClickedPattern arrays
+//   if (currentLevel == gamePattern[gamePattern.length - 1]){
+//     console.log('success');
+//     //if user pattern is same length as gamePattern,
+//     if (userClickedPattern.length == gamePattern.length){
+//       //start the next round after
+//       setTimeout(function(){
+//         nextSequence();
+//       }, 1000);
+//     }
+//
+//   } else {
+//     console.log('error');
+//   }
+// }
+
+function checkAnswer(currentLevel){
+
+  if (gamePattern[currentLevel] === userClickedPattern[currentLevel]){
+    console.log('success');
+
+    if (userClickedPattern.length === gamePattern.length){
+      setTimeout(function(){
+        nextSequence();
+      }, 1000);
+    }
+
+  } else {
+    console.log('error');
+  }
 
 }
 
