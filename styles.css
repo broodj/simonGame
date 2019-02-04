@@ -43,7 +43,7 @@ body {
 
 
 .game-over {
-  /* TODO:  */
+  background-color: #c70039;
 }
 
 .pressed {

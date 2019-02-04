@@ -3,6 +3,7 @@ var gamePattern = [];
 var userClickedPattern = [];
 var gameStarted = false;
 var level = 0;
+var wrong = new Audio('sounds/wrong.mp3');
 
 $(document).keypress(function(){
   if(!gameStarted){
@@ -18,9 +19,10 @@ $('.btn').click(function(event) {
   var userChosenColour = $(this).attr('id');
   //add the chosen square to the player pattern
   userClickedPattern.push(userChosenColour);
+  checkAnswer(userClickedPattern.length - 1);
   playSound(userChosenColour);
   animateClick(userChosenColour);
-  checkAnswer(userClickedPattern.length - 1);
+
 
 
 });
@@ -73,7 +75,12 @@ function checkAnswer(currentLevel){
     }
 
   } else {
-    console.log('error');
+    wrong.play();
+    $('h1').text('Game Over, Press Any Key to Restart');
+    $('body').addClass('game-over');
+    setTimeout(function(){
+      $('body').removeClass('game-over');
+    }, 200);
   }
 
 }
